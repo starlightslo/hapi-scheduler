@@ -1,0 +1,31 @@
+{
+  "name": "hapi-scheduler",
+  "version": "0.0.1",
+  "description": "Cron jobs for internal hapi.js routes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "lab -L --timeout 10000 --leaks"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/starlightslo/hapi-scheduler.git"
+  },
+  "keywords": [
+    "hapi",
+    "plugin",
+    "cron",
+    "schedule",
+    "management"
+  ],
+  "author": "Tony Huang <tony@huang.ninja> (http://huang.ninja)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/starlightslo/hapi-scheduler/issues"
+  },
+  "homepage": "https://github.com/starlightslo/hapi-scheduler#readme",
+  "devDependencies": {
+    "code": "^5.1.2",
+    "lab": "^15.1.2"
+  }
+}
