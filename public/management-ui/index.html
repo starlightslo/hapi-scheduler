@@ -5,23 +5,23 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="{{description}}">
-    <meta name="author" content="{{author}}">
+    <meta name="description" content="<%= description %>">
+    <meta name="author" content="<%= author %>">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
         crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="{{managementPath}}/css/styles.css" rel="stylesheet">
+    <link href="<%= managementPath %>/css/styles.css" rel="stylesheet">
 
-    <title>{{title}} - {{version}}</title>
+    <title><%= title %> - <%= version %></title>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="{{managementPath}}">Schedule Management</a>
+            <a class="navbar-brand" href="<%= managementPath %>">Schedule Management</a>
             <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -192,7 +192,7 @@
         crossorigin="anonymous"></script>
 
     <!-- AngularJS Content -->
-    <script src="{{managementPath}}/js/index.js"></script>
+    <script src="<%= managementPath %>/js/index.js"></script>
 </body>
 
 </html>
