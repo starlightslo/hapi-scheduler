@@ -1,3 +1,3 @@
 'use strict';
 
-console.log('Hello hapi-schedule');
+module.exports = require('./lib');
