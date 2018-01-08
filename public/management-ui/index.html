@@ -15,171 +15,175 @@
     <!-- Custom styles for this template -->
     <link href="<%= managementPath %>/css/styles.css" rel="stylesheet">
 
-    <title><%= title %> - <%= version %></title>
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <!-- Moment -->
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+
+    <title>
+        <%= title %> -
+            <%= version %>
+    </title>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="<%= managementPath %>">Schedule Management</a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </nav>
-    </header>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Jobs
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logs</a>
-                    </li>
-                </ul>
-
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
-                    </li>
-                </ul>
+    <div id="app">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="<%= managementPath %>">Schedule Management</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </nav>
+        </header>
 
-            <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-                <h2>Jobs</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>amet</td>
-                                <td>consectetur</td>
-                                <td>adipiscing</td>
-                                <td>elit</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                                <td>Praesent</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>libero</td>
-                                <td>Sed</td>
-                                <td>cursus</td>
-                                <td>ante</td>
-                            </tr>
-                            <tr>
-                                <td>1,004</td>
-                                <td>dapibus</td>
-                                <td>diam</td>
-                                <td>Sed</td>
-                                <td>nisi</td>
-                            </tr>
-                            <tr>
-                                <td>1,005</td>
-                                <td>Nulla</td>
-                                <td>quis</td>
-                                <td>sem</td>
-                                <td>at</td>
-                            </tr>
-                            <tr>
-                                <td>1,006</td>
-                                <td>nibh</td>
-                                <td>elementum</td>
-                                <td>imperdiet</td>
-                                <td>Duis</td>
-                            </tr>
-                            <tr>
-                                <td>1,007</td>
-                                <td>sagittis</td>
-                                <td>ipsum</td>
-                                <td>Praesent</td>
-                                <td>mauris</td>
-                            </tr>
-                            <tr>
-                                <td>1,008</td>
-                                <td>Fusce</td>
-                                <td>nec</td>
-                                <td>tellus</td>
-                                <td>sed</td>
-                            </tr>
-                            <tr>
-                                <td>1,009</td>
-                                <td>augue</td>
-                                <td>semper</td>
-                                <td>porta</td>
-                                <td>Mauris</td>
-                            </tr>
-                            <tr>
-                                <td>1,010</td>
-                                <td>massa</td>
-                                <td>Vestibulum</td>
-                                <td>lacinia</td>
-                                <td>arcu</td>
-                            </tr>
-                            <tr>
-                                <td>1,011</td>
-                                <td>eget</td>
-                                <td>nulla</td>
-                                <td>Class</td>
-                                <td>aptent</td>
-                            </tr>
-                            <tr>
-                                <td>1,012</td>
-                                <td>taciti</td>
-                                <td>sociosqu</td>
-                                <td>ad</td>
-                                <td>litora</td>
-                            </tr>
-                            <tr>
-                                <td>1,013</td>
-                                <td>torquent</td>
-                                <td>per</td>
-                                <td>conubia</td>
-                                <td>nostra</td>
-                            </tr>
-                            <tr>
-                                <td>1,014</td>
-                                <td>per</td>
-                                <td>inceptos</td>
-                                <td>himenaeos</td>
-                                <td>Curabitur</td>
-                            </tr>
-                            <tr>
-                                <td>1,015</td>
-                                <td>sodales</td>
-                                <td>ligula</td>
-                                <td>in</td>
-                                <td>libero</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <router-link to="/jobs">Jobs</router-link>
+                            <span class="sr-only">(current)</span>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/logs">Logs</router-link>
+                        </li>
+                    </ul>
+
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <router-view></router-view>
+
+                <script type="text/x-template" id="jobs">
+                    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+                        <div>
+                            <div class="float-left"><h2>Jobs</h2></div>
+                            <div class="float-right">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newJobModal">New Job</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Cron Time</th>
+                                        <th>Request</th>
+                                        <th>Time Zone</th>
+                                        <th>Running</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <jobs-list v-bind:job="job" v-bind:index="index" v-for="(job, index) in jobs"></jobs-list>
+                                </tbody>
+                            </table>
+                        </div>
+                    </main>
+                </script>
+
+                <script type="text/x-template" id="logs">
+                    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+                        <div>
+                            <div class="float-left"><h2>Logs</h2></div>
+                            <div class="float-right"></div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Success</th>
+                                        <th>Result</th>
+                                        <th>Timestamp</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <logs-list v-bind:log="log" v-bind:index="index" v-for="(log, index) in logs"></logs-list>
+                                </tbody>
+                            </table>
+                        </div>
+                    </main>
+                </script>
+
+                <div class="modal fade bd-example-modal-lg" id="newJobModal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">New Job</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" v-model="name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Cron Time</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ timezone }}</button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#" v-for="timezone in timezones" @click="changeTimezone(timezone)">{{ timezone }}</a>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* * * * *" v-model="cronTime">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Request URL</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ method }}</button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#" @click="changeMethod('GET')">GET</a>
+                                                        <a class="dropdown-item" href="#" @click="changeMethod('POST')">POST</a>
+                                                        <a class="dropdown-item" href="#" @click="changeMethod('PUT')">PUT</a>
+                                                        <a class="dropdown-item" href="#" @click="changeMethod('DELETE')">DELETE</a>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="http://xxx.xxx.xxx" v-model="url">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Request Header</label>
+                                        <textarea class="form-control" id="" rows="3" v-model="header"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Request Body</label>
+                                        <textarea class="form-control" id="" rows="3" v-model="body"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" @click="createJob">Create</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </main>
+
+            </div>
         </div>
     </div>
 
@@ -191,7 +195,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
         crossorigin="anonymous"></script>
 
-    <!-- AngularJS Content -->
+    <!-- Vue Content -->
+    <script type="text/javascript">
+        /* Pass the management path to frontend */
+        const managementPath = '<%= managementPath %>';
+    </script>
+    <!-- Vue Components -->
+    <script src="<%= managementPath %>/js/components/jobs.js"></script>
+    <script src="<%= managementPath %>/js/components/logs.js"></script>
     <script src="<%= managementPath %>/js/index.js"></script>
 </body>
 
