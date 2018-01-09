@@ -16,7 +16,7 @@ const app = new Vue({
         return {
             name: '',
             timezone: 0,
-            cronTime: '* * * * *',
+            cronTime: '* * * * * *',
             method: 'GET',
             url: '',
             header: '',
