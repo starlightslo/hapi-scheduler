@@ -1,8 +1,9 @@
 const routes = [
-    { path: '/', component: JobsComponent },
-    { path: '/jobs', component: JobsComponent },
-    { path: '/logs', redirect: '/logs/1' },
-    { path: '/logs/:page', component: LogsComponent }
+    { path: '/', redirect: '/job/1' },
+    { path: '/job', redirect: '/job/1' },
+    { path: '/job/:page', component: JobsComponent },
+    { path: '/log', redirect: '/log/1' },
+    { path: '/log/:page', component: LogsComponent }
 ];
 
 const router = new VueRouter({
@@ -31,7 +32,7 @@ const app = new Vue({
         this.$data.timezone = 0;
     },
     methods: {
-        createJob() {
+        async createJob() {
             let data = {
                 name: this.$data.name,
                 cronTime: this.$data.cronTime,
@@ -39,15 +40,19 @@ const app = new Vue({
                 requestMethod: this.$data.method,
                 requestBody: this.$data.body,
                 requestHeader: this.$data.header,
-                timeZone: this.$data.timezone
+                timezone: this.$data.timezone
             };
-            this.$http.post(managementPath + '/api/schedule', data, {
+            const response = await this.$http.post(managementPath + '/api/job', data, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then((response) => {
-                console.log(response);
             });
+            if (response.status !== 200) {
+                console.error(response);
+                return;
+            }
+
+            console.log(response.body);
         },
         changeMethod(method) {
             this.$data.method = method;

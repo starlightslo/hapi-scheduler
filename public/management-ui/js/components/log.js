@@ -11,7 +11,7 @@ const LogsComponent = Vue.component('Logs', {
     },
     methods: {
         async getLogs(page) {
-            let response = await this.$http.get(managementPath + '/api/logsize');
+            let response = await this.$http.get(managementPath + '/api/log-size');
             if (response.status !== 200) {
                 console.error(response);
                 return;

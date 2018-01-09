@@ -24,8 +24,7 @@
     <script src="https://momentjs.com/downloads/moment.js"></script>
 
     <title>
-        <%= title %> -
-            <%= version %>
+        <%= title %> - <%= version %>
     </title>
 </head>
 
@@ -46,11 +45,11 @@
                 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
-                            <router-link to="/jobs">Jobs</router-link>
+                            <router-link to="/job">Job</router-link>
                             <span class="sr-only">(current)</span>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/logs">Logs</router-link>
+                            <router-link to="/log">Log</router-link>
                         </li>
                     </ul>
 
@@ -69,13 +68,13 @@
                             <div class="float-left"><h2>Jobs</h2></div>
                             <div class="float-right">
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newJobModal">New Job</button>
+                                <Page v-bind:maxPage="maxPage" path="/job" v-bind:nowPage="$route.params.page"></Page>
                             </div>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>Name</th>
                                         <th>Cron Time</th>
                                         <th>Request</th>
@@ -96,7 +95,7 @@
                         <div>
                             <div class="float-left"><h2>Logs</h2></div>
                             <div class="float-right">
-                                <Page v-bind:maxPage="maxPage" path="/logs" v-bind:nowPage="$route.params.page"></Page>
+                                <Page v-bind:maxPage="maxPage" path="/log" v-bind:nowPage="$route.params.page"></Page>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -203,8 +202,8 @@
     </script>
     <!-- Vue Components -->
     <script src="<%= managementPath %>/js/components/page.js"></script>
-    <script src="<%= managementPath %>/js/components/jobs.js"></script>
-    <script src="<%= managementPath %>/js/components/logs.js"></script>
+    <script src="<%= managementPath %>/js/components/job.js"></script>
+    <script src="<%= managementPath %>/js/components/log.js"></script>
     <script src="<%= managementPath %>/js/index.js"></script>
 </body>
 
