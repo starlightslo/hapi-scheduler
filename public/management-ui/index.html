@@ -61,7 +61,7 @@
                     </ul>
                 </nav>
 
-                <router-view></router-view>
+                <router-view :key="$route.fullPath"></router-view>
 
                 <script type="text/x-template" id="jobs">
                     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
@@ -95,17 +95,18 @@
                     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
                         <div>
                             <div class="float-left"><h2>Logs</h2></div>
-                            <div class="float-right"></div>
+                            <div class="float-right">
+                                <Page v-bind:maxPage="maxPage" path="/logs" v-bind:nowPage="$route.params.page"></Page>
+                            </div>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Timestamp</th>
                                         <th>Name</th>
                                         <th>Success</th>
                                         <th>Result</th>
-                                        <th>Timestamp</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -201,6 +202,7 @@
         const managementPath = '<%= managementPath %>';
     </script>
     <!-- Vue Components -->
+    <script src="<%= managementPath %>/js/components/page.js"></script>
     <script src="<%= managementPath %>/js/components/jobs.js"></script>
     <script src="<%= managementPath %>/js/components/logs.js"></script>
     <script src="<%= managementPath %>/js/index.js"></script>

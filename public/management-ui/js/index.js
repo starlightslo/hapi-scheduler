@@ -1,7 +1,8 @@
 const routes = [
     { path: '/', component: JobsComponent },
     { path: '/jobs', component: JobsComponent },
-    { path: '/logs', component: LogsComponent }
+    { path: '/logs', redirect: '/logs/1' },
+    { path: '/logs/:page', component: LogsComponent }
 ];
 
 const router = new VueRouter({
