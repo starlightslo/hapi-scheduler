@@ -37,33 +37,30 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item" v-bind:class="{ active: $route.path.startsWith('/job') }">
+                            <router-link class="nav-link" to="/job">
+                                Job<span class="sr-only"></span>
+                            </router-link>
+                        </li>
+                        <li class="nav-item" v-bind:class="{ active: $route.path.startsWith('/log') }">
+                            <router-link class="nav-link" to="/log">
+                                Log<span class="sr-only"></span>
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </header>
 
         <div class="container-fluid">
             <div class="row">
-                <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-                    <ul class="nav nav-pills flex-column">
-                        <li class="nav-item">
-                            <router-link to="/job">Job</router-link>
-                            <span class="sr-only">(current)</span>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/log">Log</router-link>
-                        </li>
-                    </ul>
-
-                    <ul class="nav nav-pills flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Logout</a>
-                        </li>
-                    </ul>
-                </nav>
-
                 <router-view :key="$route.fullPath"></router-view>
 
                 <script type="text/x-template" id="jobs">
-                    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+                    <main role="main" class="col pt-3">
                         <div>
                             <div class="float-left"><h2>Jobs</h2></div>
                             <div class="float-right">
@@ -91,7 +88,7 @@
                 </script>
 
                 <script type="text/x-template" id="logs">
-                    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+                    <main role="main" class="col pt-3">
                         <div>
                             <div class="float-left"><h2>Logs</h2></div>
                             <div class="float-right">
