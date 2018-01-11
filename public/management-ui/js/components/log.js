@@ -7,25 +7,11 @@ const LogsComponent = Vue.component('Logs', {
         }
     },
     created: function () {
-        this.getLogs(this.$route.params.page);
+        this.getLogs();
     },
     methods: {
-        async getLogs(page) {
-            let response = await this.$http.get(managementPath + '/api/log-size');
-            if (response.status !== 200) {
-                console.error(response);
-                return;
-            }
-                
-            this.$data.maxPage = response.body;
-            page = (page > this.$data.maxPage) ? this.$data.maxPage : page;
-            response = await this.$http.get(managementPath + '/api/log?page=' + page);
-            if (response.status !== 200) {
-                console.error(response);
-                return;
-            }
-
-            this.$data.logs = response.body;
+        async getLogs() {
+            this.$store.dispatch('getLogs', this.$route.params.page);
         },
     }
 });
