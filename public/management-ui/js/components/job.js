@@ -87,6 +87,14 @@ Vue.component('JobModal', {
                         <label for="exampleFormControlTextarea1">Request Body</label>
                         <textarea class="form-control" id="" rows="3" v-model="body"></textarea>
                     </div>
+                    <div class="form-group" v-if="$store.state.errorMessage.length > 0">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error:</strong> {{ $store.state.errorMessage }}
+                            <button type="button" class="close" @click="closeErrorMessage">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -125,7 +133,10 @@ Vue.component('JobModal', {
                 requestHeader: this.$data.header,
                 timezone: this.$data.timezone
             };
-            await this.$store.dispatch('createJob', data);
+            const success = await this.$store.dispatch('createJob', data);
+            if (!success) {
+                return;
+            }
 
             // Refresh data
             await this.$store.dispatch('getJobs', this.$route.params.page);
@@ -142,5 +153,8 @@ Vue.component('JobModal', {
         closeNewJobModal() {
             $(this.$parent.$refs.newJobModal).modal('hide');
         },
+        closeErrorMessage() {
+            this.$store.dispatch('clearErrorMessage');
+        }
     }
 })

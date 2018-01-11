@@ -23,8 +23,8 @@ const store = new Vuex.Store({
         closeLoading({ commit }) {
             commit('loading', false);
         },
-        setErrorMessage({ commit }, message) {
-            commit('errorMessage', message);
+        clearErrorMessage({ commit }) {
+            commit('errorMessage', '');
         },
         async getJobs({ commit }, page) {
             commit('loading', true);
@@ -32,7 +32,7 @@ const store = new Vuex.Store({
             if (response.status !== 200) {
                 commit('errorMessage', response);
                 commit('loading', false);
-                return;
+                return false;
             }
 
             const maxPage = response.body;
@@ -42,11 +42,12 @@ const store = new Vuex.Store({
             if (response.status !== 200) {
                 commit('errorMessage', response);
                 commit('loading', false);
-                return;
+                return false;
             }
 
             commit('jobs', response.body);
             commit('loading', false);
+            return true;
         },
         async getLogs({ commit }, page) {
             commit('loading', true);
@@ -54,7 +55,7 @@ const store = new Vuex.Store({
             if (response.status !== 200) {
                 commit('errorMessage', response);
                 commit('loading', false);
-                return;
+                return false;
             }
             
             const maxPage = response.body;
@@ -64,11 +65,12 @@ const store = new Vuex.Store({
             if (response.status !== 200) {
                 commit('errorMessage', response);
                 commit('loading', false);
-                return;
+                return false;
             }
 
             commit('logs', response.body);
             commit('loading', false);
+            return true;
         },
         async createJob({ commit }, data) {
             commit('loading', true);
@@ -80,10 +82,11 @@ const store = new Vuex.Store({
             if (response.status !== 200) {
                 commit('errorMessage', response);
                 commit('loading', false);
-                return;
+                return false;
             }
 
             commit('loading', false);
+            return true;
         }
     }
 });
