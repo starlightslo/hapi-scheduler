@@ -5,19 +5,126 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="{{description}}">
-    <meta name="author" content="{{author}}">
+    <meta name="description" content="<%= description %>">
+    <meta name="author" content="<%= author %>">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
         crossorigin="anonymous">
 
-    <title>{{title}} - {{version}}</title>
+    <!-- Custom styles for this template -->
+    <link href="<%= managementPath %>/css/styles.css" rel="stylesheet">
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+
+    <!-- Moment -->
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+
+    <title>
+        <%= title %> - <%= version %>
+    </title>
 </head>
 
 <body>
-    <h1>Hello {{title}}</h1>
+    <div id="app">
+        <div class="loader-view" v-if="$store.state.loading">
+            <div class="loader"></div>
+        </div>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="<%= managementPath %>">Schedule Management</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item" v-bind:class="{ active: $route.path.startsWith('/job') }">
+                            <router-link class="nav-link" to="/job">
+                                Job
+                                <span class="sr-only"></span>
+                            </router-link>
+                        </li>
+                        <li class="nav-item" v-bind:class="{ active: $route.path.startsWith('/log') }">
+                            <router-link class="nav-link" to="/log">
+                                Log
+                                <span class="sr-only"></span>
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container-fluid">
+            <div class="row">
+                <router-view :key="$route.fullPath"></router-view>
+
+                <script type="text/x-template" id="jobs">
+                    <main role="main" class="col pt-3">
+                        <div>
+                            <div class="float-left"><h2>Jobs</h2></div>
+                            <div class="float-right">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newJobModal">New Job</button>
+                                <Page v-bind:maxPage="$store.state.maxPage" path="/job" v-bind:nowPage="$route.params.page"></Page>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Cron Time</th>
+                                        <th>Request</th>
+                                        <th>Time Zone</th>
+                                        <th>Running</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <jobs-list v-bind:job="job" v-bind:index="index" v-for="(job, index) in $store.state.jobs"></jobs-list>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal fade bd-example-modal-lg" id="newJobModal" aria-hidden="true" ref="newJobModal">
+                            <JobModal title="New Job"></JobModal>
+                        </div>
+                    </main>
+                </script>
+
+                <script type="text/x-template" id="logs">
+                    <main role="main" class="col pt-3">
+                        <div>
+                            <div class="float-left"><h2>Logs</h2></div>
+                            <div class="float-right">
+                                <Page v-bind:maxPage="$store.state.maxPage" path="/log" v-bind:nowPage="$route.params.page"></Page>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Name</th>
+                                        <th>Success</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <logs-list v-bind:log="log" v-bind:index="index" v-for="(log, index) in $store.state.logs"></logs-list>
+                                </tbody>
+                            </table>
+                        </div>
+                    </main>
+                </script>
+
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -27,8 +134,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
         crossorigin="anonymous"></script>
 
-    <!-- AngularJS Content -->
-    <script src="{{managementPath}}/js/index.js"></script>
+    <!-- Vue Content -->
+    <script type="text/javascript">
+        /* Pass the management path to frontend */
+        const managementPath = '<%= managementPath %>';
+    </script>
+    <!-- Vue Components -->
+    <script src="<%= managementPath %>/js/stores/store.js"></script>
+    <script src="<%= managementPath %>/js/components/page.js"></script>
+    <script src="<%= managementPath %>/js/components/job.js"></script>
+    <script src="<%= managementPath %>/js/components/log.js"></script>
+    <script src="<%= managementPath %>/js/index.js"></script>
 </body>
 
 </html>
