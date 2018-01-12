@@ -56,6 +56,14 @@
                                 <span class="sr-only"></span>
                             </router-link>
                         </li>
+                        <% if (isAuth) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<%= managementPath %>/api/logout">
+                                Logout
+                                <span class="sr-only"></span>
+                            </a>
+                        </li>
+                        <% } %>
                     </ul>
                 </div>
             </nav>
