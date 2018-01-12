@@ -18,7 +18,10 @@ const options = {
     config: {
         databaseURL: 'https://schedule.firebaseio.com/',
         credential: FirebaseAdmin.credential.cert(serviceAccount)
-    }
+    },
+    auth: 'basic',
+    username: 'admin',
+    password: 'admin'
 };
 
 // Add the route
