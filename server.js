@@ -1,9 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
-const FirebaseAdmin = require('firebase-admin');
 const HapiSchedule = require('./lib/index');
-const serviceAccount = require('./firebase.json');
 
 // Create a server with a host and port
 const server = Hapi.server({ 
@@ -14,10 +12,12 @@ const server = Hapi.server({
 // Scheduler options
 const options = {
     managementPath: '/schedule',
-    source: 'Firebase',
+    source: 'pg',
     config: {
-        databaseURL: 'https://schedule.firebaseio.com/',
-        credential: FirebaseAdmin.credential.cert(serviceAccount)
+        databaseURL: '127.0.0.1',
+        username: 'test',
+        password: '1qa2ws3',
+        database: 'test'
     },
     auth: 'basic',
     username: 'admin',
@@ -27,7 +27,7 @@ const options = {
 // Add the route
 server.route({
     method: 'GET',
-    path:'/', 
+    path:'/',
     handler: function (request, h) {
         console.log(request.info.id + ': hello world');
         return 'hello world';
