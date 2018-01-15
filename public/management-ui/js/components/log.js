@@ -20,7 +20,7 @@ Vue.component('logs-list', {
     props: ['log', 'index'],
     template: `
     <tr>
-        <td>{{ moment.unix(log.timestamp).format('YYYY/MM/DD HH:mm:ss') }}</td>
+        <td>{{ moment(log.timestamp).format('YYYY/MM/DD HH:mm:ss') }}</td>
         <td>{{ log.name }}</td>
         <td>{{ log.success }}</td>
         <td>{{ log.result }}</td>
