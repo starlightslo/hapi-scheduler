@@ -12,12 +12,9 @@ const server = Hapi.server({
 // Scheduler options
 const options = {
     managementPath: '/schedule',
-    source: 'pg',
+    source: 'sqlite3',
     config: {
-        databaseURL: '127.0.0.1',
-        username: 'test',
-        password: '1qa2ws3',
-        database: 'test'
+        databaseURL: 'scheduler-db'
     },
     auth: 'basic',
     username: 'admin',
