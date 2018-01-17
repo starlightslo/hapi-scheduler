@@ -16,6 +16,11 @@ const JobsComponent = Vue.component('Jobs', {
 
 Vue.component('jobs-list', {
     props: ['job', 'index'],
+    data: function() {
+        return {
+            _modalKeyStr: 'confirmModal'
+        };
+    },
     template: `
     <tr>
         <td>{{ job.name }}</td>
@@ -23,9 +28,62 @@ Vue.component('jobs-list', {
         <td>{{ job.requestMethod }} {{ job.requestURL }}</td>
         <td>{{ job.timezone }}</td>
         <td>{{ job.running }}</td>
+        <td>
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" @click="showModal(job.id)">Delete</button>
+            <DeleteConfirmModal v-bind:modalKey="getKey(job.id)" v-bind:jobName="job.name" v-bind:jobId="job.id"></DeleteConfirmModal>
+        </td>
     </tr>
-    `
+    `,
+    methods: {
+        getKey(jobId) {
+            return this.$data._modalKeyStr + jobId;
+        },
+        showModal(jobId) {
+            $('#' + this.$data._modalKeyStr + jobId).modal('show');
+        }
+    }
 });
+
+Vue.component('DeleteConfirmModal', {
+    props: ['jobName', 'jobId', 'modalKey'],
+    template: `
+    <div class="modal fade" tabindex="-1" role="dialog" v-bind:id="modalKey">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Delete <span class="text-danger">{{ jobName }}</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to delete <span class="text-danger">{{ jobName }}</span> job?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @click="deleteJob(jobId)">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    `,
+    methods: {
+        async deleteJob(jobId) {
+            const success = await this.$store.dispatch('deleteJob', jobId);
+
+            // Close modal
+            this.closeNewJobModal();
+
+            // Refresh data
+            await this.$store.dispatch('getJobs', this.$route.params.page);
+        },
+        closeNewJobModal() {
+            $('#' + this.modalKey).modal('hide');
+        }
+    }
+})
 
 Vue.component('JobModal', {
     props: ['title'],
@@ -138,11 +196,11 @@ Vue.component('JobModal', {
                 return;
             }
 
-            // Refresh data
-            await this.$store.dispatch('getJobs', this.$route.params.page);
-
             // Close modal
             this.closeNewJobModal();
+
+            // Refresh data
+            await this.$store.dispatch('getJobs', this.$route.params.page);
         },
         changeMethod(method) {
             this.$data.method = method;

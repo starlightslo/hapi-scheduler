@@ -87,6 +87,18 @@ const store = new Vuex.Store({
 
             commit('loading', false);
             return true;
+        },
+        async deleteJob({ commit }, jobId) {
+            commit('loading', true);
+            const response = await Vue.http.delete(managementPath + '/api/job/' + jobId);
+            if (response.status !== 200) {
+                commit('errorMessage', response);
+                commit('loading', false);
+                return false;
+            }
+
+            commit('loading', false);
+            return true;
         }
     }
 });
