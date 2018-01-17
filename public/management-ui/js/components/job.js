@@ -73,11 +73,11 @@ Vue.component('DeleteConfirmModal', {
         async deleteJob(jobId) {
             const success = await this.$store.dispatch('deleteJob', jobId);
 
-            // Refresh data
-            await this.$store.dispatch('getJobs', this.$route.params.page);
-
             // Close modal
             this.closeNewJobModal();
+
+            // Refresh data
+            await this.$store.dispatch('getJobs', this.$route.params.page);
         },
         closeNewJobModal() {
             $('#' + this.modalKey).modal('hide');
@@ -196,11 +196,11 @@ Vue.component('JobModal', {
                 return;
             }
 
-            // Refresh data
-            await this.$store.dispatch('getJobs', this.$route.params.page);
-
             // Close modal
             this.closeNewJobModal();
+
+            // Refresh data
+            await this.$store.dispatch('getJobs', this.$route.params.page);
         },
         changeMethod(method) {
             this.$data.method = method;
