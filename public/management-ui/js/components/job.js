@@ -35,11 +35,11 @@ Vue.component('jobs-list', {
     </tr>
     `,
     methods: {
-        getKey: (jobId) => {
-            return _modalKeyStr + jobId;
+        getKey(jobId) {
+            return this.$data._modalKeyStr + jobId;
         },
-        showModal: (jobId) => {
-            $('#' + _modalKeyStr + jobId).modal('show');
+        showModal(jobId) {
+            $('#' + this.$data._modalKeyStr + jobId).modal('show');
         }
     }
 });
@@ -71,7 +71,16 @@ Vue.component('DeleteConfirmModal', {
     `,
     methods: {
         async deleteJob(jobId) {
-            console.log(jobId);
+            const success = await this.$store.dispatch('deleteJob', jobId);
+
+            // Refresh data
+            await this.$store.dispatch('getJobs', this.$route.params.page);
+
+            // Close modal
+            this.closeNewJobModal();
+        },
+        closeNewJobModal() {
+            $('#' + this.modalKey).modal('hide');
         }
     }
 })
